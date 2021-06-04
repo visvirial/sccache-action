@@ -19,6 +19,8 @@ jobs:
 
     - name: Configure sccache
       uses: ./
+      with:
+        cache-key: sccache-ubuntu-latest
 
     - name: Build
       run: cargo build --verbose
