@@ -1,0 +1,34 @@
+{
+  "name": "sccache-action",
+  "version": "0.0.1",
+  "description": "A GitHub Action that speeds up Rust compilation with sccache.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run build:main && npm run build:post",
+    "build:main": "ncc build --target es2020 -o dist/main src/main.ts",
+    "build:post": "ncc build --target es2020 -o dist/post src/post.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/visvirial/sccache-action.git"
+  },
+  "keywords": [
+    "rust",
+    "sccache",
+    "ccache",
+    "cache"
+  ],
+  "author": "Masahiko Hyuga <mail@mhyuga.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/visvirial/sccache-action/issues"
+  },
+  "homepage": "https://github.com/visvirial/sccache-action#readme",
+  "devDependencies": {
+    "@actions/cache": "^1.0.7",
+    "@actions/core": "^1.3.0",
+    "@vercel/ncc": "^0.28.6",
+    "github-api": "^3.4.0",
+    "typescript": "^4.3.2"
+  }
+}

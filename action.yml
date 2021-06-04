@@ -1,0 +1,18 @@
+name: 'sccache action - speedup Rust GitHub actions'
+description: 'A GitHub Action that speeds up Rust compilation with sccache.'
+inputs:
+  cache-key:
+    description: 'The cache key.'
+    default: 'sccache'
+  release-name:
+    descript: 'The sccache version.'
+    default: 'latest',
+  arch:
+    descript: 'The sccache binary architecture.'
+    default: 'x86_64-unknown-linux-musl',
+runs:
+  using: 'node12'
+  main: 'dist/main/index.js'
+  post: 'dist/post/index.js'
+branding:
+  icon: 'archive'
