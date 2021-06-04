@@ -10,7 +10,7 @@ export const showStat = async () => {
 export const saveCache = async () => {
 	try {
 		const cacheKey    = core.getInput('cache-key');
-		await cache.saveCache([`${process.env.HOME}/.cache/sscache`], cacheKey);
+		await cache.saveCache([`${process.env.HOME}/.cache/sccache`], cacheKey);
 	} catch(err) {
 		core.setFailed(err.message);
 	}
