@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run build:main && npm run build:post",
-    "build:main": "ncc build --target es2020 -o dist/main src/main.ts",
-    "build:post": "ncc build --target es2020 -o dist/post src/post.ts"
+    "build:main": "ncc build -m --target es2020 -o dist/main src/main.ts",
+    "build:post": "ncc build -m --target es2020 -o dist/post src/post.ts"
   },
   "repository": {
     "type": "git",
