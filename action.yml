@@ -16,3 +16,4 @@ runs:
   post: 'dist/post/index.js'
 branding:
   icon: 'archive'
+  color: 'black'
