@@ -18,8 +18,8 @@ export const saveCache = async () => {
 
 export const run = async () => {
 	try {
-		showStat();
-		
+		await showStat();
+		await saveCache();
 	} catch(err) {
 		core.setFailed(err.message);
 	}

@@ -59882,14 +59882,24 @@ var saveCache = function () { return __awaiter(void 0, void 0, void 0, function 
     });
 }); };
 var run = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var err_2;
     return __generator(this, function (_a) {
-        try {
-            showStat();
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, showStat()];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, saveCache()];
+            case 2:
+                _a.sent();
+                return [3 /*break*/, 4];
+            case 3:
+                err_2 = _a.sent();
+                _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(err_2.message);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
-        catch (err) {
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(err.message);
-        }
-        return [2 /*return*/];
     });
 }); };
 run();
