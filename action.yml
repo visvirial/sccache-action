@@ -5,11 +5,11 @@ inputs:
     description: 'The cache key.'
     default: 'sccache'
   release-name:
-    descript: 'The sccache version.'
-    default: 'latest',
+    description: 'The sccache version.'
+    default: 'latest'
   arch:
-    descript: 'The sccache binary architecture.'
-    default: 'x86_64-unknown-linux-musl',
+    description: 'The sccache binary architecture.'
+    default: 'x86_64-unknown-linux-musl'
 runs:
   using: 'node12'
   main: 'dist/main/index.js'
