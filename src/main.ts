@@ -39,7 +39,13 @@ export const setupRust = async () => {
 };
 
 export const restoreCache = async (cacheKey: string) => {
-	await cache.restoreCache([`${process.env.HOME}/.cache/sccache`], `${cacheKey}-${new Date().toISOString()}`, [`${cacheKey}-`]);
+	const restoredCacheKey = await cache.restoreCache(
+		[`${process.env.HOME}/.cache/sccache`], `${cacheKey}-${new Date().toISOString()}`, [`${cacheKey}-`]);
+	if(restoredCacheKey) {
+		core.info(`Cache restored from ${restoredCacheKey}.`);
+	} else {
+		core.info(`Cache not found.`);
+	}
 };
 
 export const resetStat = async () => {
