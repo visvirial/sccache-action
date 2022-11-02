@@ -11,7 +11,7 @@ inputs:
     description: 'The sccache binary architecture.'
     default: 'x86_64-unknown-linux-musl'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/main/index.js'
   post: 'dist/post/index.js'
 branding:
