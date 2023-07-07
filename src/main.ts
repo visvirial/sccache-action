@@ -32,7 +32,7 @@ export const download = async (releaseName: string, arch: string) => {
 	const token = core.getInput('token');
 	const affixToken = token ? `-H 'Authorization: Bearer ${token}'` : '';
 
-	await exec(`curl "${asset.browser_download_url}" ${affixToken} -L -o /tmp/sccache.tar.gz`);
+	await exec(`curl ${affixToken} "${asset.browser_download_url}" -L -o /tmp/sccache.tar.gz`);
 	await exec(`tar xvf /tmp/sccache.tar.gz -C /tmp`);
 	await exec(`mv /tmp/${asset.name.replace('.tar.gz', '')} /tmp/sccache`);
 	await exec(`chmod +x /tmp/sccache/sccache`);
