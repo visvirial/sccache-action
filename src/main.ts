@@ -34,13 +34,13 @@ export const download = async (releaseName: string, arch: string) => {
 	const bearerToken = token ? `Bearer ${token}` : undefined;
 
 	console.log("Downloading sccache...")
-	const downloadTarget = await tc.downloadTool(asset.browser_download_url, '/tmp/sccache.tar.gz', bearerToken);
+	const downloadTarget = await tc.downloadTool(asset.browser_download_url, undefined, bearerToken);
 
 	console.log("Extracting sccache...");
-	const extractTarget = await tc.extractTar(downloadTarget, '/tmp');
+	const extractTarget = await tc.extractTar(downloadTarget);
 
 	console.log("Extracting toolchain...");
-	await exec(`mv ${extractTarget} /tmp/sccache`);
+	await exec(`mv ${extractTarget}/${asset.name.replace('.tar.gz', '')} /tmp/sccache`);
 	await exec(`chmod +x /tmp/sccache/sccache`);
 };
 
