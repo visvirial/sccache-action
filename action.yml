@@ -10,6 +10,8 @@ inputs:
   arch:
     description: 'The sccache binary architecture.'
     default: 'x86_64-unknown-linux-musl'
+  token:
+    description: 'The GitHub token to use for requests to the GitHub API. Allows a higher rate limit.'
 runs:
   using: 'node16'
   main: 'dist/main/index.js'

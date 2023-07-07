@@ -1,12 +1,14 @@
 
 import { writeFileSync } from 'fs';
-const GitHub = require('github-api');
+import * as GitHub from 'github-api';
 import * as core from '@actions/core';
 import * as cache from '@actions/cache';
 import { exec } from '@actions/exec';
 
 export const getAsset = async (releaseName: string, arch: string) => {
-	const gh = new GitHub();
+	const gh = new GitHub({
+		token: core.getInput('token'),
+	});
 	const repo = gh.getRepo('mozilla', 'sccache');
 	const asset = await (async () => {
 		if(releaseName == 'latest') {
@@ -27,7 +29,10 @@ export const getAsset = async (releaseName: string, arch: string) => {
 
 export const download = async (releaseName: string, arch: string) => {
 	const asset = await getAsset(releaseName, arch);
-	await exec(`curl "${asset.browser_download_url}" -L -o /tmp/sccache.tar.gz`);
+	const token = core.getInput('token');
+	const affixToken = token ? `-H 'Authorization: Bearer ${token}'` : '';
+
+	await exec(`curl "${asset.browser_download_url}" ${affixToken} -L -o /tmp/sccache.tar.gz`);
 	await exec(`tar xvf /tmp/sccache.tar.gz -C /tmp`);
 	await exec(`mv /tmp/${asset.name.replace('.tar.gz', '')} /tmp/sccache`);
 	await exec(`chmod +x /tmp/sccache/sccache`);
