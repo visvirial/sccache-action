@@ -1,6 +1,6 @@
 
 import { writeFileSync } from 'fs';
-import * as GitHub from 'github-api';
+const GitHub = require('github-api');
 import * as core from '@actions/core';
 import * as cache from '@actions/cache';
 import { exec } from '@actions/exec';
