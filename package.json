@@ -30,5 +30,8 @@
     "@vercel/ncc": "^0.28.6",
     "github-api": "^3.4.0",
     "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@actions/tool-cache": "^2.0.1"
   }
 }

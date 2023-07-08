@@ -28,3 +28,24 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
+
+  build-with-key:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Configure sccache
+      uses: ./
+      with:
+        cache-key: sccache-ubuntu-latest
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build
+      run: cargo build --verbose
+
+    - name: Run tests
+      run: cargo test --verbose
+
+

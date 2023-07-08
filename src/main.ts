@@ -4,9 +4,12 @@ const GitHub = require('github-api');
 import * as core from '@actions/core';
 import * as cache from '@actions/cache';
 import { exec } from '@actions/exec';
+import * as tc from '@actions/tool-cache';
 
 export const getAsset = async (releaseName: string, arch: string) => {
-	const gh = new GitHub();
+	const gh = new GitHub({
+		token: core.getInput('token'),
+	});
 	const repo = gh.getRepo('mozilla', 'sccache');
 	const asset = await (async () => {
 		if(releaseName == 'latest') {
@@ -27,9 +30,17 @@ export const getAsset = async (releaseName: string, arch: string) => {
 
 export const download = async (releaseName: string, arch: string) => {
 	const asset = await getAsset(releaseName, arch);
-	await exec(`curl "${asset.browser_download_url}" -L -o /tmp/sccache.tar.gz`);
-	await exec(`tar xvf /tmp/sccache.tar.gz -C /tmp`);
-	await exec(`mv /tmp/${asset.name.replace('.tar.gz', '')} /tmp/sccache`);
+	const token = core.getInput('token');
+	const bearerToken = token ? `Bearer ${token}` : undefined;
+
+	console.log("Downloading sccache...")
+	const downloadTarget = await tc.downloadTool(asset.browser_download_url, undefined, bearerToken);
+
+	console.log("Extracting sccache...");
+	const extractTarget = await tc.extractTar(downloadTarget);
+
+	console.log("Extracting toolchain...");
+	await exec(`mv ${extractTarget}/${asset.name.replace('.tar.gz', '')} /tmp/sccache`);
 	await exec(`chmod +x /tmp/sccache/sccache`);
 };
 
